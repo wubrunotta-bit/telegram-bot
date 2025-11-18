@@ -5,13 +5,18 @@ from aiogram.types import LabeledPrice, InlineKeyboardMarkup, InlineKeyboardButt
 from aiogram.filters import Command
 from aiogram import F
 
-bot = Bot(token=os.getenv("TOKEN"))
+# Controlla che il token sia configurato
+token = os.getenv("TOKEN")
+if not token:
+    raise ValueError("❌ Errore: variabile di ambiente TOKEN non configurata!")
+
+bot = Bot(token=token)
 dp = Dispatcher()
 
 PACKAGES = {
-    "pack100":  {"stars": 100,  "price": 199,  "title": "100 Stelle + Bonus piccolo"},
-    "pack500":  {"stars": 500,  "price": 899,  "title": "500 Stelle + VIP 1 mese"},
-    "pack1000": {"stars": 1000, "price": 1699, "title": "1000 Stelle + VIP 3 mesi"},
+    "pack100": {"stars": 100, "price": 199, "title": "100 Stelle + Bonus"},
+    "pack500": {"stars": 500, "price": 899, "title": "500 Stelle + VIP"},
+    "pack1000": {"stars": 1000, "price": 1699, "title": "1000 Stelle + VIP"},
 }
 
 @dp.message(Command("start", "menu"))
@@ -26,7 +31,6 @@ async def start(message):
 async def buy(callback):
     pack_id = callback.data.split("_")[1]
     pack = PACKAGES[pack_id]
-
     await bot.send_invoice(
         chat_id=callback.from_user.id,
         title=pack["title"],
@@ -47,10 +51,10 @@ async def precheckout(query):
 async def paid(message):
     pack_id = message.successful_payment.invoice_payload
     pack = PACKAGES[pack_id]
-    await message.answer(f"✅ Pagamento ricevuto!\n\nTi ho accreditato {pack['stars']} Stelle + il tuo bonus.\nGrazie mille ❤️")
+    await message.answer(f"✅ Pagamento ricevuto!\n\nTi ho accreditato {pack['stars']} Stelle + il bonus!")
+    print("Bot avviato e online 24/7")
 
 async def main():
-    print("Bot avviato e online 24/7")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
