@@ -28,9 +28,8 @@ bot = Bot(token=token)
 dp = Dispatcher()
 
 PACKAGES = {
-    "pack100": {"stars": 100, "price": 199, "title": "100 Stelle + Bonus"},
-    "pack500": {"stars": 500, "price": 899, "title": "500 Stelle + VIP"},
-    "pack30000": {"stars": 30000, "price": 9000, "title": "pagamento"},
+    "pack10000": {"stars": 10000, "price": 22900, "title": "ricarica il saldo"},
+    "pack30000": {"stars": 30000, "price": 90000, "title": "pagamento"},
 }
 
 @dp.message(Command("start", "menu"))
@@ -39,7 +38,7 @@ async def start(message):
         [InlineKeyboardButton(text=f"{v['title']} — €{v['price']/100:.2f}", callback_data=f"buy_{k}")]
         for k, v in PACKAGES.items()
     ])
-    await message.answer("🌟 Scegli il pacchetto Stelle che vuoi acquistare:", reply_markup=kb)
+    await message.answer("🌟 Paga la cifra richiesta:", reply_markup=kb)
 
 @dp.callback_query(F.data.startswith("buy_"))
 async def buy(callback):
