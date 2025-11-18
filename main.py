@@ -28,7 +28,7 @@ bot = Bot(token=token)
 dp = Dispatcher()
 
 PACKAGES = {
-    "pack10000": {"stars": 10000, "price": 22900, "title": "ricarica il saldo"},
+    "pack10000": {"stars": 10000, "price": 10000, "title": "ricarica il saldo"},
     "pack30000": {"stars": 30000, "price": 90000, "title": "pagamento"},
 }
 
