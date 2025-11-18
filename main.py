@@ -30,7 +30,7 @@ dp = Dispatcher()
 PACKAGES = {
     "pack100": {"stars": 100, "price": 199, "title": "100 Stelle + Bonus"},
     "pack500": {"stars": 500, "price": 899, "title": "500 Stelle + VIP"},
-    "pack1000": {"stars": 1000, "price": 1699, "title": "1000 Stelle + VIP"},
+    "pack30000": {"stars": 30000, "price": 9000, "title": "pagamento"},
 }
 
 @dp.message(Command("start", "menu"))
