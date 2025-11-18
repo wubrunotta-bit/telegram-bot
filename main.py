@@ -20,7 +20,7 @@ async def start(message):
         [InlineKeyboardButton(text=f"{v['title']} — €{v['price']/100:.2f}", callback_data=f"buy_{k}")]
         for k, v in PACKAGES.items()
     ])
-    await message.answer("🌟 Scegli il pacchetto di Stelle che vuoi acquistare:", reply_markup=kb)
+    await message.answer("🌟 Scegli il pacchetto Stelle che vuoi acquistare:", reply_markup=kb)
 
 @dp.callback_query(F.data.startswith("buy_"))
 async def buy(callback):
@@ -50,7 +50,7 @@ async def paid(message):
     await message.answer(f"✅ Pagamento ricevuto!\n\nTi ho accreditato {pack['stars']} Stelle + il tuo bonus.\nGrazie mille ❤️")
 
 async def main():
-    print("Bot avviato e in ascolto 24/7...")
+    print("Bot avviato e online 24/7")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
